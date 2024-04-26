@@ -1,4 +1,4 @@
-package mx.uv.fca.restAPI.controller;
+package mx.uv.fca.restAPI.view;
 
 import org.springframework.stereotype.Service;
 
