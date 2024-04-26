@@ -1,15 +1,33 @@
 package mx.uv.fca.restAPI.model;
 
 import java.time.LocalDate;
-
+import jakarta.validation.constraints.Size;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.lang.NonNull;
 
 @Document("mangas")
 public class Manga {
+    private ObjectId _id;
+
+    @NonNull
     private LocalDate releaseDate;
+
+    @NonNull
+    @Size(max = 50)
     private String author;
-    private String genre;
+
+    @NonNull
+    @Size(min = 10, max = 100)
     private String title;
+
+    public ObjectId get_id() {
+        return _id;
+    }
+
+    public void set_id(ObjectId _id) {
+        this._id = _id;
+    }
 
     public LocalDate getReleaseDate() {
         return releaseDate;
@@ -25,14 +43,6 @@ public class Manga {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getTitle() {
