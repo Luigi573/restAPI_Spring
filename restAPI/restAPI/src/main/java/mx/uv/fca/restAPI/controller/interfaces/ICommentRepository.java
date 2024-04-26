@@ -7,9 +7,9 @@ import org.bson.types.ObjectId;
 public interface ICommentRepository {
     public ObjectId addComment(Comment comment);
 
-    public List<Comment> getChapterComments(ObjectId chapterID);
+    public List<Comment> getChapterComments(ObjectId c_id);
 
-    public void updateComment(ObjectId commentID, String content);
+    public void updateComment(ObjectId _id, String content);
 
-    public void deleteComment(ObjectId commentID);
+    public void deleteComment(ObjectId _id);
 }
