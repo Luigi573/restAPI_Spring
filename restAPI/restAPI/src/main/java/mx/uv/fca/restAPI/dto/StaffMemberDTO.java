@@ -3,14 +3,11 @@ package mx.uv.fca.restAPI.dto;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import mx.uv.fca.restAPI.model.StaffTypes;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
 @Document("staff")
 public class StaffMemberDTO {
-    private ObjectId _id;
-
     @NonNull
     @Size(max = 100)
     private String name;
@@ -20,14 +17,6 @@ public class StaffMemberDTO {
 
     @NonNull
     private StaffTypes type;
-
-    public ObjectId get_id() {
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-    }
 
     public String getName() {
         return name;

@@ -6,9 +6,9 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import mx.uv.fca.restAPI.interfaces.IStaffRepository;
 import mx.uv.fca.restAPI.model.StaffMember;
 import mx.uv.fca.restAPI.model.StaffTypes;
+import mx.uv.fca.restAPI.repository.interfaces.IStaffRepository;
 
 public class StaffRepository implements IStaffRepository {
     @Autowired

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
-import mx.uv.fca.restAPI.interfaces.ICommentRepository;
 import mx.uv.fca.restAPI.model.Comment;
+import mx.uv.fca.restAPI.repository.interfaces.ICommentRepository;
 
 @Repository
 public class CommentRepository implements ICommentRepository {

@@ -1,17 +1,13 @@
 package mx.uv.fca.restAPI.dto;
 
+import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
-import jakarta.validation.constraints.Size;
-
 @Document("magazines")
 public class MagazineDTO {
-    private ObjectId _id;
-
     @NonNull
     private List<MangaDTO> releasedMangas;
 
@@ -25,14 +21,6 @@ public class MagazineDTO {
     @NonNull
     @Size(min = 20, max = 50)
     private String editorial;
-
-    public ObjectId get_id() {
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-    }
 
     public List<MangaDTO> getReleasedMangas() {
         return releasedMangas;

@@ -1,4 +1,4 @@
-package mx.uv.fca.restAPI.interfaces;
+package mx.uv.fca.restAPI.repository.interfaces;
 
 import java.util.List;
 import mx.uv.fca.restAPI.model.Comment;

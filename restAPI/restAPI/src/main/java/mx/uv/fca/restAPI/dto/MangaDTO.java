@@ -2,14 +2,11 @@ package mx.uv.fca.restAPI.dto;
 
 import java.time.LocalDate;
 import jakarta.validation.constraints.Size;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
 @Document("mangas")
 public class MangaDTO {
-    private ObjectId _id;
-
     @NonNull
     private LocalDate releaseDate;
 
@@ -20,14 +17,6 @@ public class MangaDTO {
     @NonNull
     @Size(min = 10, max = 100)
     private String title;
-
-    public ObjectId get_id() {
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-    }
 
     public LocalDate getReleaseDate() {
         return releaseDate;
@@ -52,5 +41,4 @@ public class MangaDTO {
     public void setTitle(String title) {
         this.title = title;
     }
-
 }
