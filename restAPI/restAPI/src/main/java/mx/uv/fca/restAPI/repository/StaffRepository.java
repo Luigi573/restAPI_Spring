@@ -1,4 +1,4 @@
-package mx.uv.fca.restAPI.controller;
+package mx.uv.fca.restAPI.repository;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import mx.uv.fca.restAPI.controller.interfaces.IStaffRepository;
+import mx.uv.fca.restAPI.interfaces.IStaffRepository;
 import mx.uv.fca.restAPI.model.StaffMember;
 import mx.uv.fca.restAPI.model.StaffTypes;
 
