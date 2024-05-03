@@ -3,11 +3,13 @@ package mx.uv.fca.restAPI.model;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
 @Data
+@NoArgsConstructor
 @Document("comments")
 public class Comment {
     private ObjectId _id;
