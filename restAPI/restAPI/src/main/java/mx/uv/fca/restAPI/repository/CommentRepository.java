@@ -15,23 +15,28 @@ public class CommentRepository implements ICommentRepository {
     @Autowired
     private MongoTemplate template;
 
-    public ObjectId addComment(Comment comment) {
+    @Override
+    public void addComment(Comment comment) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addComment'");
     }
 
+    @Override
     public List<Comment> getChapterComments(ObjectId chapterID) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getChapterComments'");
     }
 
+    @Override
     public void updateComment(ObjectId commentID, String content) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateComment'");
     }
 
+    @Override
     public void deleteComment(ObjectId commentID) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteComment'");
     }
+
 }
