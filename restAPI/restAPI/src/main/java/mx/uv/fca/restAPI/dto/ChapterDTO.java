@@ -8,11 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("chapters")
 public class ChapterDTO {
-    @Min(1)
+    @Min(value = 1, message = "El capítulo debe ser un número mayor a 1")
     private float number;
 
     @NonNull
     private String title;
+
+    @NonNull
     private Dictionary<StaffMemberDTO, StaffTypes> staff;
 
     public float getNumber() {

@@ -16,7 +16,7 @@ public class CommentRepository implements ICommentRepository {
     private MongoTemplate template;
 
     @Override
-    public ObjectId addComment(Comment comment) {
+    public void addComment(Comment comment) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addComment'");
     }

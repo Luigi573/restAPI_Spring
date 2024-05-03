@@ -15,7 +15,14 @@ public class Chapter {
 
     @NonNull
     private String title;
+
+    @NonNull
     private Dictionary<StaffMember, StaffTypes> staff;
+
+    public Chapter(float number, String title) {
+        this.number = number;
+        this.title = title;
+    }
 
     public ObjectId get_id() {
         return _id;

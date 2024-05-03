@@ -14,11 +14,11 @@ public class Manga {
     private LocalDate releaseDate;
 
     @NonNull
-    @Size(max = 50)
+    @Size(max = 50, message = "El título no debe exceder los 50 caracteres.")
     private String author;
 
     @NonNull
-    @Size(min = 10, max = 100)
+    @Size(min = 5, max = 100, message = "El tamaño del título debe estar entre 5 y 100 caracteres.")
     private String title;
 
     public ObjectId get_id() {
