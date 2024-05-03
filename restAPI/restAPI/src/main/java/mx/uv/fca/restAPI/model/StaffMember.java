@@ -1,11 +1,14 @@
 package mx.uv.fca.restAPI.model;
 
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+
 import java.time.LocalDateTime;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
+@Data
 @Document("staff")
 public class StaffMember {
     private ObjectId _id;
@@ -19,36 +22,4 @@ public class StaffMember {
 
     @NonNull
     private StaffTypes type;
-
-    public ObjectId get_id() {
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDateTime getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(LocalDateTime joinDate) {
-        this.joinDate = joinDate;
-    }
-
-    public StaffTypes getType() {
-        return type;
-    }
-
-    public void setType(StaffTypes type) {
-        this.type = type;
-    }
 }

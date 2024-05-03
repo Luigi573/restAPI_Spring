@@ -3,9 +3,11 @@ package mx.uv.fca.restAPI.dto;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
+@Data
 @Document("magazines")
 public class MagazineDTO {
     @NonNull
@@ -21,36 +23,4 @@ public class MagazineDTO {
     @NonNull
     @Size(min = 20, max = 50)
     private String editorial;
-
-    public List<MangaDTO> getReleasedMangas() {
-        return releasedMangas;
-    }
-
-    public void setReleasedMangas(List<MangaDTO> releasedMangas) {
-        this.releasedMangas = releasedMangas;
-    }
-
-    public LocalDateTime getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(LocalDateTime releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getEditorial() {
-        return editorial;
-    }
-
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
 }

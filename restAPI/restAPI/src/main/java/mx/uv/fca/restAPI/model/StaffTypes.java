@@ -1,5 +1,8 @@
 package mx.uv.fca.restAPI.model;
 
+import lombok.ToString;
+
+@ToString
 public enum StaffTypes {
     TRANSLATOR("Translator"),
     REDRAWER("Redrawer"),
@@ -11,10 +14,5 @@ public enum StaffTypes {
 
     private StaffTypes(String title) {
         this.title = title;
-    }
-
-    @Override
-    public String toString() {
-        return title;
     }
 }

@@ -1,11 +1,13 @@
 package mx.uv.fca.restAPI.model;
 
-import com.mongodb.lang.NonNull;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import java.util.Dictionary;
+import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
 @Document("chapters")
 public class Chapter {
     private ObjectId _id;
@@ -13,46 +15,14 @@ public class Chapter {
     @Min(1)
     private float number;
 
-    @NonNull
+    @NotBlank
     private String title;
 
-    @NonNull
+    @NotBlank
     private Dictionary<StaffMember, StaffTypes> staff;
 
     public Chapter(float number, String title) {
         this.number = number;
         this.title = title;
-    }
-
-    public ObjectId get_id() {
-        return _id;
-    }
-
-    public void set_id(ObjectId _id) {
-        this._id = _id;
-    }
-
-    public float getNumber() {
-        return number;
-    }
-
-    public void setNumber(float number) {
-        this.number = number;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Dictionary<StaffMember, StaffTypes> getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Dictionary<StaffMember, StaffTypes> staff) {
-        this.staff = staff;
     }
 }

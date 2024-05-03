@@ -13,13 +13,17 @@ public class CommentService {
     private CommentRepository repository;
 
     public void postComment(CommentDTO commentDTO) {
+        repository.addComment(toModel(commentDTO));
+    }
+
+    private Comment toModel(CommentDTO dto) {
         Comment comment = new Comment();
 
-        comment.setChapter(new Chapter(commentDTO.getChapter().getNumber(), commentDTO.getChapter().getTitle()));
-        comment.setCommenter(commentDTO.getCommenter());
-        comment.setContent(commentDTO.getContent());
-        comment.setPostDate(commentDTO.getPostDate());
+        comment.setChapter(new Chapter(dto.getChapter().getNumber(), dto.getChapter().getTitle()));
+        comment.setCommenter(dto.getCommenter());
+        comment.setContent(dto.getContent());
+        comment.setPostDate(dto.getPostDate());
 
-        repository.addComment(comment);
+        return comment;
     }
 }
