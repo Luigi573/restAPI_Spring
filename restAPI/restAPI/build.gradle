@@ -3,6 +3,8 @@ plugins {
 	id 'org.springframework.boot' version '3.2.4'
 	id 'io.freefair.lombok' version '5.3.0'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'net.ltgt.apt' version '0.21'
+
 }
 
 group = 'mx.uv.fca'
@@ -28,6 +30,9 @@ dependencies {
 
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	compile 'org.mapstruct:mapstruct:1.5.5.Final'
+    apt 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 }
 
 tasks.named('test') {

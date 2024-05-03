@@ -2,6 +2,8 @@ package mx.uv.fca.restAPI.model;
 
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
@@ -10,6 +12,7 @@ import org.springframework.lang.NonNull;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document("comments")
 public class Comment {
     private ObjectId _id;
