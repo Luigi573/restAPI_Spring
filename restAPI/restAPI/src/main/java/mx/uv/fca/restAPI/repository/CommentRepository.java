@@ -1,35 +1,11 @@
 package mx.uv.fca.restAPI.repository;
 
-import java.util.List;
 import mx.uv.fca.restAPI.model.Comment;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CommentRepository{
-    @Autowired
-    private MongoTemplate template;
-
-    public void addComment(Comment comment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addComment'");
-    }
-
-    public List<Comment> getChapterComments(ObjectId chapterID) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getChapterComments'");
-    }
-
-    public void updateComment(ObjectId commentID, String content) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateComment'");
-    }
-
-    public void deleteComment(ObjectId commentID) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteComment'");
-    }
+public interface CommentRepository extends MongoRepository<Comment, ObjectId> {
 
 }

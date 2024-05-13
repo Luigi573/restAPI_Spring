@@ -1,5 +1,8 @@
 package mx.uv.fca.restAPI.service;
 
+import java.util.List;
+
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import mx.uv.fca.restAPI.dto.CommentDTO;
@@ -12,8 +15,24 @@ public class CommentService {
     @Autowired
     private CommentRepository repository;
 
-    public void postComment(CommentDTO commentDTO) {
-        repository.addComment(toModel(commentDTO));
+    public void postComment(Comment comment) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addComment'");
+    }
+
+    public List<Comment> getChapterComments(ObjectId chapterID) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getChapterComments'");
+    }
+
+    public void updateComment(ObjectId commentID, String content) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateComment'");
+    }
+
+    public void deleteComment(ObjectId commentID) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteComment'");
     }
 
     private Comment toModel(CommentDTO dto) {
