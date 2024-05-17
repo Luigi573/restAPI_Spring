@@ -23,11 +23,5 @@ public class Chapter {
     private String title;
     @NotBlank
     private Dictionary<StaffMember, StaffTypes> staff;
-    @DBRef
     private ObjectId mangaId;
-
-    public Chapter(float number, String title) {
-        this.number = number;
-        this.title = title;
-    }
 }

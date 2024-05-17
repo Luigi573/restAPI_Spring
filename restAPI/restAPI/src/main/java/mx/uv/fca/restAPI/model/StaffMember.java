@@ -11,7 +11,7 @@ import org.springframework.lang.NonNull;
 @Data
 @Document("staff")
 public class StaffMember {
-    private ObjectId _id;
+    private ObjectId id;
 
     @NonNull
     @Size(max = 100)

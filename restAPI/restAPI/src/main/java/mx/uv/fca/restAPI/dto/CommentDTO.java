@@ -23,4 +23,6 @@ public class CommentDTO {
     @NonNull
     @Size(max = 300)
     private String content;
+
+    private String id;
 }

@@ -15,7 +15,7 @@ public interface MangaMapper {
     @Mapping(target = "id", expression = "java(new ObjectId(dto.getId()))")
     Manga toModel(MangaDTO dto);
 
-
     List<MangaDTO> toDTOs(List<Manga> models);
+
     List<Manga> toModels(List<MangaDTO> dtos);
 }

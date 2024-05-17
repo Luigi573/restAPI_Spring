@@ -23,4 +23,6 @@ public class MagazineDTO {
     @NonNull
     @Size(min = 20, max = 50)
     private String editorial;
+
+    private String id;
 }

@@ -10,7 +10,7 @@ import org.springframework.lang.NonNull;
 @Data
 @Document("mangas")
 public class Manga {
-    private ObjectId _id;
+    private ObjectId id;
 
     @NonNull
     private LocalDate releaseDate;

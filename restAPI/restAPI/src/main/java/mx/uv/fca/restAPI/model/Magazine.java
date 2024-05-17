@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -15,7 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 @Document("magazines")
 public class Magazine {
-    private ObjectId _id;
+    @Id
+    private ObjectId id;
 
     @NotBlank
     private List<Manga> releasedMangas;

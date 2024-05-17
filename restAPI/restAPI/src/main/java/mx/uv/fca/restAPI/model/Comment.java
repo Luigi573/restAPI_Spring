@@ -15,7 +15,7 @@ import org.springframework.lang.NonNull;
 @AllArgsConstructor
 @Document("comments")
 public class Comment {
-    private ObjectId _id;
+    private ObjectId id;
 
     @NonNull
     private Chapter chapter;

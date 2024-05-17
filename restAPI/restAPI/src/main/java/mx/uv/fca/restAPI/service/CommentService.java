@@ -24,7 +24,7 @@ public class CommentService {
 
     public List<CommentDTO> getChapterComments(ObjectId chapterID) {
         List<Comment> commentList = repository.findByChapterId(chapterID);
-
+        return mapper.toDTOs(commentList);
     }
 
     public void updateComment(ObjectId commentID, String content) {
