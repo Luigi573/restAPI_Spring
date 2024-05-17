@@ -12,7 +12,7 @@ public interface MangaMapper {
     @Mapping(target = "id", source = "model.id.toHexString")
     MangaDTO toDTO(Manga model);
 
-    @Mapping(target = "id", expression = "java(new ObjectId(dto.getId()))")
+    @Mapping(target = "_id", expression = "java(new ObjectId(dto.getId()))")
     Manga toModel(MangaDTO dto);
 
     List<MangaDTO> toDTOs(List<Manga> models);

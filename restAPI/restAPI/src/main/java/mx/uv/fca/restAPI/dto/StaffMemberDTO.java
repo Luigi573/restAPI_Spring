@@ -19,4 +19,6 @@ public class StaffMemberDTO {
 
     @NonNull
     private StaffTypes type;
+
+    private String id;
 }

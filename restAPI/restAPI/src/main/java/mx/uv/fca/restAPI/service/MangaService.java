@@ -28,10 +28,13 @@ public class MangaService {
 
     public MangaDTO saveManga(MangaDTO mangaDTO) {
         Manga manga = mangaMapper.toModel(mangaDTO);
-        return mangaRepository.save(manga);
+        manga = mangaRepository.save(manga);
+
+        return mangaMapper.toDTO(manga);
     }
 
-    public void updateManga(MangaDTO manga) {
+    public void updateManga(MangaDTO mangaDTO) {
+        Manga manga = mangaMapper.toModel(mangaDTO);
         mangaRepository.save(manga);
     }
 
@@ -45,9 +48,8 @@ public class MangaService {
         mangaRepository.deleteById(mangaId);
     }
 
-    public ChapterDTO postChapter(ChapterDTO chapterDTO, ObjectId mangaId) {
+    public ChapterDTO postChapter(ChapterDTO chapterDTO) {
         Chapter chapter = chapterMapper.toModel(chapterDTO);
-        chapter.setMangaId(mangaId);
         chapter = chapterRepository.save(chapter);
 
         return chapterMapper.toDTO(chapter);
@@ -64,9 +66,7 @@ public class MangaService {
         chapterRepository.save(chapter);
     }
 
-    public void deleteChapter(ChapterDTO chapterDTO) {
-        Chapter chapter = chapterMapper.toModel(chapterDTO);
-
-        chapterRepository.delete(chapter);
+    public void deleteChapter(ObjectId chapterId) {
+        chapterRepository.deleteById(chapterId);
     }
 }

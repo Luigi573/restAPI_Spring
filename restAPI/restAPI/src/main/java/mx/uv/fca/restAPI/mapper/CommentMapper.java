@@ -14,7 +14,7 @@ public interface CommentMapper {
     @Mapping(target = "id", source = "model.id.toHexString")
     CommentDTO toDTO(Comment model);
 
-    @Mapping(target = "id", expression = "java(new ObjectId(dto.getId()))")
+    @Mapping(target = "_id", expression = "java(new ObjectId(dto.getId()))")
     Comment toModel(CommentDTO dto);
 
     List<CommentDTO> toDTOs(List<Comment> models);

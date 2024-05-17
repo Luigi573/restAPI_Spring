@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface ChapterMapper {
-    @Mapping(target = "_id", source = "model.id.toHexString")
+    @Mapping(target = "id", source = "model.id.toHexString")
     ChapterDTO toDTO(Chapter model);
 
     @Mapping(target = "_id", expression = "java(new ObjectId(dto.getId()))")

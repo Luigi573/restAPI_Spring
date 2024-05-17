@@ -1,6 +1,9 @@
 package mx.uv.fca.restAPI.service;
 
 import java.util.List;
+
+import mx.uv.fca.restAPI.dto.StaffMemberDTO;
+import mx.uv.fca.restAPI.mapper.StaffMemberMapper;
 import mx.uv.fca.restAPI.model.StaffMember;
 import mx.uv.fca.restAPI.model.StaffTypes;
 import mx.uv.fca.restAPI.repository.StaffRepository;
@@ -12,29 +15,34 @@ import org.springframework.stereotype.Service;
 public class StaffService {
     @Autowired
     private StaffRepository repository;
+    @Autowired
+    private StaffMemberMapper mapper;
 
-    public ObjectId addStaffMember(StaffMember staff) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addStaffMember'");
+    public StaffMemberDTO addStaffMember(StaffMemberDTO staffDTO) {
+        StaffMember staff = mapper.toModel(staffDTO);
+        repository.save(staff);
+
+        return mapper.toDTO(staff);
     }
 
-    public List<StaffMember> getStaffMembers() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStaffMembers'");
+    public List<StaffMemberDTO> getStaffMembers() {
+        List<StaffMember> staffList = repository.findAll();
+
+        return mapper.toDTOs(staffList);
     }
 
-    public List<StaffMember> getStaffMembersByType(StaffTypes type) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStaffMembersByType'");
+    public List<StaffMemberDTO> getStaffMembersByType(StaffTypes type) {
+        List<StaffMember> staffList = repository.findByType(type);
+
+        return mapper.toDTOs(staffList);
     }
 
-    public void updateStaffMemberInfo(StaffMember older, StaffMember newer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateStaffMemberInfo'");
+    public void updateStaffMemberInfo(StaffMemberDTO staffDTO) {
+        StaffMember staff = mapper.toModel(staffDTO);
+        repository.save(staff);
     }
 
-    public void deleteStaffMember(ObjectId _id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteStaffMember'");
+    public void deleteStaffMember(ObjectId id) {
+        repository.deleteById(id);
     }
 }

@@ -18,22 +18,26 @@ public class CommentService {
     @Autowired
     private CommentMapper mapper;
 
-    public Comment postComment(Comment comment) {
-        return repository.save(comment);
+    public CommentDTO postComment(CommentDTO commentDTO) {
+        Comment comment = mapper.toModel(commentDTO);
+        comment = repository.save(comment);
+
+        return mapper.toDTO(comment);
     }
 
-    public List<CommentDTO> getChapterComments(ObjectId chapterID) {
-        List<Comment> commentList = repository.findByChapterId(chapterID);
+    public List<CommentDTO> getChapterComments(ObjectId chapterId) {
+        List<Comment> commentList = repository.findByChapterId(chapterId);
+
         return mapper.toDTOs(commentList);
     }
 
-    public void updateComment(ObjectId commentID, String content) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateComment'");
+    public void updateComment(CommentDTO commentDTO) {
+        Comment comment = mapper.toModel(commentDTO);
+
+        repository.save(comment);
     }
 
-    public void deleteComment(ObjectId commentID) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteComment'");
+    public void deleteComment(ObjectId commentId) {
+        repository.deleteById(commentId);
     }
 }

@@ -14,7 +14,7 @@ public interface MagazineMapper {
     @Mapping(target = "id", source = "model.id.toHexString")
     MagazineDTO toDTO(Magazine model);
 
-    @Mapping(target = "id", expression = "java(new ObjectId(dto.getId()))")
+    @Mapping(target = "_id", expression = "java(new ObjectId(dto.getId()))")
     Magazine toModel(MagazineDTO dto);
 
     List<MagazineDTO> toDTOs(List<Magazine> models);

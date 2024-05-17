@@ -1,25 +1,21 @@
 package mx.uv.fca.restAPI.model;
 
-import jakarta.validation.constraints.Size;
+import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.lang.NonNull;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document("staff")
 public class StaffMember {
-    private ObjectId id;
-
-    @NonNull
-    @Size(max = 100)
+    @Id
+    private ObjectId _id;
     private String name;
-
-    @NonNull
-    private LocalDateTime joinDate;
-
-    @NonNull
+    private LocalDate joinDate;
     private StaffTypes type;
 }

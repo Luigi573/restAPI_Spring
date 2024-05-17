@@ -12,7 +12,7 @@ public interface StaffMemberMapper {
     @Mapping(target = "id", source = "model.id.toHexString")
     StaffMemberDTO toDTO(StaffMember model);
 
-    @Mapping(target = "id", expression = "java(new ObjectId(dto.getId()))")
+    @Mapping(target = "_id", expression = "java(new ObjectId(dto.getId()))")
     StaffMember toModel(StaffMemberDTO dto);
 
     List<StaffMemberDTO> toDTOs(List<StaffMember> models);
