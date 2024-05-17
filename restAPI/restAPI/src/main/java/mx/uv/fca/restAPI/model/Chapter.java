@@ -7,22 +7,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
 @Document("chapters")
 public class Chapter {
-    private ObjectId _id;
-
+    @Id
+    private ObjectId id;
     @Min(1)
     private float number;
-
     @NotBlank
     private String title;
-
     @NotBlank
     private Dictionary<StaffMember, StaffTypes> staff;
+    @DBRef
+    private ObjectId mangaId;
 
     public Chapter(float number, String title) {
         this.number = number;

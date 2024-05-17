@@ -1,7 +1,7 @@
 package mx.uv.fca.restAPI.mapper;
 
-import mx.uv.fca.restAPI.dto.CommentDTO;
-import mx.uv.fca.restAPI.model.Comment;
+import mx.uv.fca.restAPI.dto.MagazineDTO;
+import mx.uv.fca.restAPI.model.Magazine;
 
 import java.util.List;
 
@@ -10,14 +10,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface CommentMapper {
+public interface MagazineMapper {
     @Mapping(target = "id", source = "model.id.toHexString")
-    CommentDTO toDTO(Comment model);
+    MagazineDTO toDTO(Magazine model);
 
     @Mapping(target = "id", expression = "java(new ObjectId(dto.getId()))")
-    Comment toModel(CommentDTO dto);
+    Magazine toModel(MagazineDTO dto);
 
-    List<CommentDTO> toDTOs(List<Comment> models);
+    List<MagazineDTO> toDTOs(List<Magazine> models);
 
-    List<Comment> toModels(List<CommentDTO> dtos);
+    List<Magazine> toModels(List<MagazineDTO> dtos);
 }

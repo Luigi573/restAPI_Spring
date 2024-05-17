@@ -1,23 +1,21 @@
 package mx.uv.fca.restAPI.mapper;
 
-import mx.uv.fca.restAPI.dto.CommentDTO;
-import mx.uv.fca.restAPI.model.Comment;
-
 import java.util.List;
-
+import mx.uv.fca.restAPI.dto.MangaDTO;
+import mx.uv.fca.restAPI.model.Manga;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface CommentMapper {
+public interface MangaMapper {
     @Mapping(target = "id", source = "model.id.toHexString")
-    CommentDTO toDTO(Comment model);
+    MangaDTO toDTO(Manga model);
 
     @Mapping(target = "id", expression = "java(new ObjectId(dto.getId()))")
-    Comment toModel(CommentDTO dto);
+    Manga toModel(MangaDTO dto);
 
-    List<CommentDTO> toDTOs(List<Comment> models);
 
-    List<Comment> toModels(List<CommentDTO> dtos);
+    List<MangaDTO> toDTOs(List<Manga> models);
+    List<Manga> toModels(List<MangaDTO> dtos);
 }
