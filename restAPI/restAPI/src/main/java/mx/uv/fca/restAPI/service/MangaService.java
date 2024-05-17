@@ -33,6 +33,12 @@ public class MangaService {
         return mangaMapper.toDTO(manga);
     }
 
+    public List<MangaDTO> getMangas() {
+        List<Manga> mangaList = mangaRepository.findAll();
+
+        return mangaMapper.toDTOs(mangaList);
+    }
+
     public void updateManga(MangaDTO mangaDTO) {
         Manga manga = mangaMapper.toModel(mangaDTO);
         mangaRepository.save(manga);

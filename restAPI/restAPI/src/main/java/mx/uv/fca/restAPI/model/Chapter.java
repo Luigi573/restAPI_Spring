@@ -1,8 +1,6 @@
 package mx.uv.fca.restAPI.model;
 
-import java.util.Dictionary;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

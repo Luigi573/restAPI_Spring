@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
+@RequestMapping("/mangas")
 public class MangaController {
     @Autowired
     private MangaService mangaService;
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping("/mangas/getByGenre")
-    public List<MangaDTO> getMangasByGenre() {
-        throw new UnsupportedOperationException("Method getMangasByGenre() not implemented yet");
+    @RequestMapping("/getAll")
+    public List<MangaDTO> getMangas() {
+        return mangaService.getMangas();
     }
 }
