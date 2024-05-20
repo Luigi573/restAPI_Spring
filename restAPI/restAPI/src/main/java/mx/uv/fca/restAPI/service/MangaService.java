@@ -1,19 +1,16 @@
 package mx.uv.fca.restAPI.service;
 
 import java.util.List;
-
-import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import mx.uv.fca.restAPI.dto.ChapterDTO;
+import java.util.Optional;
 import mx.uv.fca.restAPI.dto.MangaDTO;
-import mx.uv.fca.restAPI.mapper.ChapterMapper;
 import mx.uv.fca.restAPI.mapper.MangaMapper;
 import mx.uv.fca.restAPI.model.Chapter;
 import mx.uv.fca.restAPI.model.Manga;
 import mx.uv.fca.restAPI.repository.ChapterRepository;
 import mx.uv.fca.restAPI.repository.MangaRepository;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class MangaService {
@@ -23,8 +20,6 @@ public class MangaService {
     private MangaMapper mangaMapper;
     @Autowired
     private ChapterRepository chapterRepository;
-    @Autowired
-    private ChapterMapper chapterMapper;
 
     public MangaDTO saveManga(MangaDTO mangaDTO) {
         Manga manga = mangaMapper.toModel(mangaDTO);
@@ -39,8 +34,28 @@ public class MangaService {
         return mangaMapper.toDTOs(mangaList);
     }
 
-    public MangaDTO getMangaByTitle(String title) {
-        return mangaMapper.toDTO(mangaRepository.findByTitle(title));
+    public Optional<MangaDTO> getMangaById(ObjectId id) {
+        Optional<Manga> mangaOptional = mangaRepository.findById(id);
+
+        if (mangaOptional.isPresent()) {
+            Manga manga = mangaOptional.get();
+            MangaDTO mangaDTO = mangaMapper.toDTO(manga);
+            return Optional.of(mangaDTO);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<MangaDTO> getMangaByTitle(String title) {
+        Optional<Manga> mangaOptional = mangaRepository.findByTitle(title);
+
+        if (mangaOptional.isPresent()) {
+            Manga manga = mangaOptional.get();
+            MangaDTO mangaDTO = mangaMapper.toDTO(manga);
+            return Optional.of(mangaDTO);
+        } else {
+            return Optional.empty();
+        }
     }
 
     public void updateManga(MangaDTO mangaDTO) {
@@ -54,33 +69,5 @@ public class MangaService {
         for (Chapter chapter : chapters) {
             chapterRepository.delete(chapter);
         }
-
-        mangaRepository.deleteById(mangaId);
-    }
-
-    public ChapterDTO postChapter(ChapterDTO chapterDTO) {
-        Chapter chapter = chapterMapper.toModel(chapterDTO);
-        chapter = chapterRepository.save(chapter);
-
-        return chapterMapper.toDTO(chapter);
-    }
-
-    public List<ChapterDTO> getMangaChapters(ObjectId mangaId) {
-        List<ChapterDTO> chapterList = chapterMapper.toDTOs(chapterRepository.findByMangaId(mangaId));
-
-        return chapterList;
-    }
-
-    public ChapterDTO getChapter(String title){
-        return chapterMapper.toDTO(chapterRepository.findByTitle(title));
-    }
-
-    public void updateChapter(ChapterDTO chapterDTO) {
-        Chapter chapter = chapterMapper.toModel(chapterDTO);
-        chapterRepository.save(chapter);
-    }
-
-    public void deleteChapter(ObjectId chapterId) {
-        chapterRepository.deleteById(chapterId);
     }
 }
