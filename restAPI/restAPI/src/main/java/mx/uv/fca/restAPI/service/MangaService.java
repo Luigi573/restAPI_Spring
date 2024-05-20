@@ -39,6 +39,10 @@ public class MangaService {
         return mangaMapper.toDTOs(mangaList);
     }
 
+    public MangaDTO getMangaByTitle(String title) {
+        return mangaMapper.toDTO(mangaRepository.findByTitle(title));
+    }
+
     public void updateManga(MangaDTO mangaDTO) {
         Manga manga = mangaMapper.toModel(mangaDTO);
         mangaRepository.save(manga);
@@ -65,6 +69,10 @@ public class MangaService {
         List<ChapterDTO> chapterList = chapterMapper.toDTOs(chapterRepository.findByMangaId(mangaId));
 
         return chapterList;
+    }
+
+    public ChapterDTO getChapter(String title){
+        return chapterMapper.toDTO(chapterRepository.findByTitle(title));
     }
 
     public void updateChapter(ChapterDTO chapterDTO) {
