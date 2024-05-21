@@ -1,12 +1,12 @@
 package mx.uv.fca.restAPI.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import mx.uv.fca.restAPI.dto.ChapterDTO;
 import mx.uv.fca.restAPI.dto.MangaDTO;
 import mx.uv.fca.restAPI.service.ChapterService;
 import mx.uv.fca.restAPI.service.MangaService;
-
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/mangas")
@@ -23,6 +24,11 @@ public class MangaController {
     private MangaService mangaService;
     @Autowired
     private ChapterService chapterService;
+
+    @GetMapping("/addManga")
+    public String addManga(@Valid @RequestBody MangaDTO manga) {
+        return new String();
+    }
 
     @GetMapping
     public ResponseEntity<List<MangaDTO>> getMangas() {
