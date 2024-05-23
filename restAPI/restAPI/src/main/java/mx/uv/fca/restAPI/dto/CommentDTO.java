@@ -21,7 +21,7 @@ public class CommentDTO {
     private String commenter;
 
     @NonNull
-    @Size(max = 300)
+    @Size(max = 300, message = "Contenido debe ser menor a 300 caracteres")
     private String content;
 
     private String id;
