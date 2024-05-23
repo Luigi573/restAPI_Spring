@@ -37,7 +37,7 @@ public class StaffService {
         return mapper.toDTOs(staffList);
     }
 
-    public void updateStaffMemberInfo(StaffMemberDTO staffDTO) {
+    public void updateStaffMember(StaffMemberDTO staffDTO) {
         StaffMember staff = mapper.toModel(staffDTO);
         repository.save(staff);
     }

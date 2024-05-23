@@ -11,6 +11,7 @@ import org.springframework.lang.NonNull;
 @Data
 @Document("chapters")
 public class ChapterDTO {
+    private String id;
     @Min(value = 1, message = "El capítulo debe ser un número mayor a 1")
     private float number;
     @NotBlank
