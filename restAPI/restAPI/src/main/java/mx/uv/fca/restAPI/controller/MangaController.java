@@ -30,7 +30,8 @@ public class MangaController {
 
     @PutMapping("/updateManga")
     public ResponseEntity<Void> updateManga(@Valid @RequestBody MangaDTO manga) {
-        return new ResponseEntity<Void>(mangaService.updateManga(manga), HttpStatus.OK);
+        mangaService.updateManga(manga);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
@@ -91,7 +92,8 @@ public class MangaController {
             @Valid @RequestBody ChapterDTO chapterDTO) {
         chapterDTO.setMangaId(mangaId);
         chapterDTO.setId(chapterId);
-        return new ResponseEntity<Void>(chapterService.updateChapter(chapterDTO), HttpStatus.OK);
+        chapterService.updateChapter(chapterDTO);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{mangaId}/chapter/{chapterId}/delete")

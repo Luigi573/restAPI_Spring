@@ -1,5 +1,6 @@
 package mx.uv.fca.restAPI.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import mx.uv.fca.restAPI.dto.StaffMemberDTO;
@@ -7,7 +8,6 @@ import mx.uv.fca.restAPI.service.StaffService;
 import mx.uv.fca.restAPI.model.StaffTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class StaffController {
 
     @GetMapping("/{staffType}")
     public ResponseEntity<List<StaffMemberDTO>> getStaffMembersByType(@PathVariable StaffTypes staffType) {
-        return new ResponseEntity<List<StaffMemberDTO>>(service.getStaffMembersByType(staffType, HttpStatus.OK));
+        return new ResponseEntity<List<StaffMemberDTO>>(service.getStaffMembersByType(staffType), HttpStatus.OK);
     }
 
     @PutMapping("/update")
