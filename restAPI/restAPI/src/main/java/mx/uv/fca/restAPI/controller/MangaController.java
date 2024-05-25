@@ -3,7 +3,6 @@ package mx.uv.fca.restAPI.controller;
 import java.util.List;
 import java.util.Optional;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 import mx.uv.fca.restAPI.dto.ChapterDTO;
 import mx.uv.fca.restAPI.dto.MangaDTO;
 import mx.uv.fca.restAPI.service.ChapterService;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
 @RestController
 @RequestMapping("/mangas")
 public class MangaController {
@@ -64,8 +62,7 @@ public class MangaController {
     }
 
     @PostMapping("/{mangaId}/postChapter")
-    public ResponseEntity<ChapterDTO> postChapter(@PathVariable String mangaId,
-            @Valid @RequestBody ChapterDTO chapterDTO) {
+    public ResponseEntity<ChapterDTO> postChapter(@PathVariable ObjectId mangaId, @Valid @RequestBody ChapterDTO chapterDTO) {
         chapterDTO.setMangaId(mangaId);
         return new ResponseEntity<ChapterDTO>(chapterService.postChapter(chapterDTO), HttpStatus.OK);
     }
@@ -88,7 +85,7 @@ public class MangaController {
     }
 
     @PutMapping("/{mangaId}/chapter/{chapterId}/update")
-    public ResponseEntity<Void> updateChapter(@PathVariable String mangaId, @PathVariable String chapterId,
+    public ResponseEntity<Void> updateChapter(@PathVariable ObjectId mangaId, @PathVariable ObjectId chapterId,
             @Valid @RequestBody ChapterDTO chapterDTO) {
         chapterDTO.setMangaId(mangaId);
         chapterDTO.setId(chapterId);
@@ -97,7 +94,7 @@ public class MangaController {
     }
 
     @DeleteMapping("/{mangaId}/chapter/{chapterId}/delete")
-    public ResponseEntity<Void> deleteChapter(@PathVariable String mangaId, @PathVariable ObjectId chapterId) {
+    public ResponseEntity<Void> deleteChapter(@PathVariable ObjectId mangaId, @PathVariable ObjectId chapterId) {
         chapterService.deleteChapter(chapterId);
         return ResponseEntity.ok().build();
     }

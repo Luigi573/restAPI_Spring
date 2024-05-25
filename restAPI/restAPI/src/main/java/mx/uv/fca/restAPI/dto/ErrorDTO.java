@@ -1,5 +1,6 @@
 package mx.uv.fca.restAPI.dto;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,5 +9,5 @@ import lombok.Data;
 public class ErrorDTO {
     private String code;
     private String message;
-    private Object details;
+    private List<String> details;
 }

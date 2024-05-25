@@ -4,13 +4,21 @@ import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document("mangas")
 public class MangaDTO {
+    private ObjectId id;
+
     @NonNull
     private LocalDateTime releaseDate;
 
@@ -21,6 +29,4 @@ public class MangaDTO {
     @NotBlank(message = "Título no definido")
     @Size(min = 5, max = 100, message = "El tamaño del título debe estar entre 5 y 100 caracteres.")
     private String title;
-
-    private String id;
 }

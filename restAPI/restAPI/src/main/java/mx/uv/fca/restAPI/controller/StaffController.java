@@ -2,7 +2,6 @@ package mx.uv.fca.restAPI.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 import mx.uv.fca.restAPI.dto.StaffMemberDTO;
 import mx.uv.fca.restAPI.service.StaffService;
 import mx.uv.fca.restAPI.model.StaffTypes;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
 @RestController
 @RequestMapping("/staff")
 public class StaffController {
