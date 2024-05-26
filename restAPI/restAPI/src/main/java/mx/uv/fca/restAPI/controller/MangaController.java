@@ -37,7 +37,7 @@ public class MangaController {
         return new ResponseEntity<List<MangaDTO>>(mangaService.getMangas(), HttpStatus.OK);
     }
 
-    @GetMapping("/{title}")
+    @GetMapping("/title/{title}")
     public ResponseEntity<MangaDTO> getMangaByTitle(@PathVariable String title) {
         Optional<MangaDTO> manga = mangaService.getMangaByTitle(title);
         ResponseEntity<MangaDTO> result = ResponseEntity.notFound().build();
@@ -49,7 +49,7 @@ public class MangaController {
         return result;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<MangaDTO> getMangaById(@PathVariable ObjectId id) {
         Optional<MangaDTO> manga = mangaService.getMangaById(id);
         ResponseEntity<MangaDTO> result = ResponseEntity.notFound().build();
@@ -61,18 +61,18 @@ public class MangaController {
         return result;
     }
 
-    @PostMapping("/{mangaId}/postChapter")
+    @PostMapping("/id/{mangaId}/postChapter")
     public ResponseEntity<ChapterDTO> postChapter(@PathVariable ObjectId mangaId, @Valid @RequestBody ChapterDTO chapterDTO) {
         chapterDTO.setMangaId(mangaId);
         return new ResponseEntity<ChapterDTO>(chapterService.postChapter(chapterDTO), HttpStatus.OK);
     }
 
-    @GetMapping("/{mangaId}/chapters")
+    @GetMapping("/id/{mangaId}/chapters")
     public ResponseEntity<List<ChapterDTO>> getMangaChapters(@PathVariable ObjectId mangaId) {
         return new ResponseEntity<List<ChapterDTO>>(chapterService.getMangaChapters(mangaId), HttpStatus.OK);
     }
 
-    @GetMapping("/{mangaId}/chapter/{chapterTitle}")
+    @GetMapping("/id/{mangaId}/chapter/{chapterTitle}")
     public ResponseEntity<ChapterDTO> getChapter(@PathVariable ObjectId mangaId, @PathVariable String chapterTitle) {
         Optional<ChapterDTO> chapter = chapterService.getChapter(mangaId, chapterTitle);
         ResponseEntity<ChapterDTO> result = ResponseEntity.notFound().build();
@@ -84,7 +84,7 @@ public class MangaController {
         return result;
     }
 
-    @PutMapping("/{mangaId}/chapter/{chapterId}/update")
+    @PutMapping("/id/{mangaId}/chapter/{chapterId}/update")
     public ResponseEntity<Void> updateChapter(@PathVariable ObjectId mangaId, @PathVariable ObjectId chapterId,
             @Valid @RequestBody ChapterDTO chapterDTO) {
         chapterDTO.setMangaId(mangaId);
@@ -93,7 +93,7 @@ public class MangaController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{mangaId}/chapter/{chapterId}/delete")
+    @DeleteMapping("/id/{mangaId}/chapter/{chapterId}/delete")
     public ResponseEntity<Void> deleteChapter(@PathVariable ObjectId mangaId, @PathVariable ObjectId chapterId) {
         chapterService.deleteChapter(chapterId);
         return ResponseEntity.ok().build();

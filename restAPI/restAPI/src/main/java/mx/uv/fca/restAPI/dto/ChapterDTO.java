@@ -2,15 +2,14 @@ package mx.uv.fca.restAPI.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mx.uv.fca.restAPI.model.StaffMember;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.lang.NonNull;
+
 
 @Data
 @NoArgsConstructor
@@ -25,9 +24,9 @@ public class ChapterDTO {
     @NotBlank(message = "Título no definido")
     private String title;
 
-    @NonNull
-    private List<StaffMember> staff;
+    @NotNull(message = "Staff members not defined")
+    private List<StaffMemberDTO> staff;
     
-    @NotBlank(message = "MangaID no definido")
+    @NotNull(message = "MangaID no definido")
     private ObjectId mangaId;
 }

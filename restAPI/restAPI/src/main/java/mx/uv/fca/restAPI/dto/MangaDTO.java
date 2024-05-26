@@ -1,16 +1,13 @@
 package mx.uv.fca.restAPI.dto;
 
 import java.time.LocalDateTime;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.lang.NonNull;
 
 @Data
 @NoArgsConstructor
@@ -18,8 +15,6 @@ import org.springframework.lang.NonNull;
 @Document("mangas")
 public class MangaDTO {
     private ObjectId id;
-
-    @NonNull
     private LocalDateTime releaseDate;
 
     @NotBlank(message = "Autor no definido")
