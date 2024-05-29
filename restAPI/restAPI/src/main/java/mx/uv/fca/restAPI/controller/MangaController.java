@@ -61,6 +61,12 @@ public class MangaController {
         return result;
     }
 
+    @DeleteMapping("id/{id}/delete")
+    public ResponseEntity<Void> deleteManga(@PathVariable ObjectId id) {
+        mangaService.deleteManga(id);
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/id/{mangaId}/postChapter")
     public ResponseEntity<ChapterDTO> postChapter(@PathVariable ObjectId mangaId,
             @Valid @RequestBody ChapterDTO chapterDTO) {
