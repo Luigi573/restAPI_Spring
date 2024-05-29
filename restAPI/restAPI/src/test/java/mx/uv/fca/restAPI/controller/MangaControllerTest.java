@@ -7,7 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import mx.uv.fca.restAPI.dto.MangaDTO;
 import mx.uv.fca.restAPI.service.ChapterService;
 import mx.uv.fca.restAPI.service.MangaService;
-
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,11 +31,10 @@ public class MangaControllerTest {
     private MangaService mangaService;
     @MockBean
     private ChapterService chapterService;
-    private static ObjectMapper objectMapper;
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeAll
     public static void setUpClass() {
-        objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
     }
 
@@ -51,52 +51,57 @@ public class MangaControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(manga)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.title").value("Class de 2 banme ni kawaii Onna no ko to Tomodachi ni natta"))
-                .andExpect(jsonPath("$.author").value("Takata"));
+                .andExpect(jsonPath("$.title").value(manga.getTitle()))
+                .andExpect(jsonPath("$.author").value(manga.getAuthor()))
+                .andExpect(jsonPath("$.releaseDate").value(manga.getReleaseDate().toString()));
     }
 
     @Test
-    void testDeleteChapter() {
+    void testDeleteChapter() throws Exception {
+        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
+        ObjectId chapterId = new ObjectId("66576e92361c4919d860a0dc");
 
+        mockMvc.perform(delete("/mangas/id/{mangaId}/chapter/{chapterId}/delete", mangaId, chapterId))
+                .andExpect(status().isOk());
     }
 
     @Test
-    void testGetChapter() {
-
-    }
-
-    @Test
-    void testGetMangaById() {
-
-    }
-
-    @Test
-    void testGetMangaByTitle() {
+    void testGetChapter() throws Exception {
 
     }
 
     @Test
-    void testGetMangaChapters() {
+    void testGetMangaById() throws Exception {
 
     }
 
     @Test
-    void testGetMangas() {
+    void testGetMangaByTitle() throws Exception {
 
     }
 
     @Test
-    void testPostChapter() {
+    void testGetMangaChapters() throws Exception {
 
     }
 
     @Test
-    void testUpdateChapter() {
+    void testGetMangas() throws Exception {
 
     }
 
     @Test
-    void testUpdateManga() {
+    void testPostChapter() throws Exception {
+
+    }
+
+    @Test
+    void testUpdateChapter() throws Exception {
+
+    }
+
+    @Test
+    void testUpdateManga() throws Exception {
 
     }
 }
