@@ -1,6 +1,6 @@
 package mx.uv.fca.restAPI.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("mangas")
 public class MangaDTO {
     private ObjectId id;
-    private LocalDateTime releaseDate;
+    private LocalDate releaseDate;
 
     @NotBlank(message = "Autor no definido")
     @Size(max = 50, message = "El título no debe exceder los 50 caracteres.")

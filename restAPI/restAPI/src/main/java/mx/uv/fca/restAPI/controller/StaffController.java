@@ -19,7 +19,7 @@ public class StaffController {
 
     @PostMapping("/add")
     public ResponseEntity<StaffMemberDTO> addStaffMember(@Valid @RequestBody StaffMemberDTO staffMember) {
-        return new ResponseEntity<StaffMemberDTO>(service.addStaffMember(staffMember), HttpStatus.OK);
+        return new ResponseEntity<StaffMemberDTO>(service.addStaffMember(staffMember), HttpStatus.CREATED);
     }
 
     @GetMapping
