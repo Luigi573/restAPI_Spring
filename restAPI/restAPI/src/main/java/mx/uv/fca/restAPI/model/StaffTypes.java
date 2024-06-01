@@ -8,5 +8,6 @@ public enum StaffTypes {
     REDRAWER,
     COLORIST,
     CLEANER,
-    PROOFREADER;
+    PROOFREADER,
+    TYPESETTER;
 }
