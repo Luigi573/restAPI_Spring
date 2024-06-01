@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import java.util.Optional;
 
 import mx.uv.fca.restAPI.dto.ChapterDTO;
 import mx.uv.fca.restAPI.dto.MangaDTO;
@@ -96,14 +97,72 @@ public class MangaControllerTest {
                 .andExpect(jsonPath("$[1].releaseDate").value(manga2.getReleaseDate().toString()))
                 .andDo(print());
     }
+    
+     @Test
+    void testGetMangaById() throws Exception {
+        MangaDTO manga = new MangaDTO();
+        manga.setId(new ObjectId("665a0dd7a9384af6a6951a7d"));
+        manga.setAuthor("Takata");
+        manga.setReleaseDate(LocalDate.of(2020, Month.NOVEMBER, 30));
+        manga.setTitle("Class de 2 banme ni kawaii Onna no ko to Tomodachi ni natta");
 
+        when(mangaService.getMangaByTitle(manga.getTitle())).thenReturn(Optional.of(manga));
+
+        mockMvc.perform(get("/mangas/id/{id}", manga.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.author").value(manga.getAuthor()))
+                .andExpect(jsonPath("$.releaseDate").value(manga.getReleaseDate().toString()))
+                .andExpect(jsonPath("$.title").value(manga.getTitle()));
+    }
+    
+    @Test
+    void testGetMangaByIdNotFound() throws Exception {
+        ObjectId mangaId = new ObjectId("665a0dd7a9384af6a6951a7d");
+
+        when(mangaService.getMangaById(mangaId)).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/mangas/id/{id}", mangaId)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+    
+     @Test
+    void testGetMangaByTitle() throws Exception {
+        MangaDTO manga = new MangaDTO();
+        manga.setId(new ObjectId("665a0dd7a9384af6a6951a7d"));
+        manga.setAuthor("Takata");
+        manga.setReleaseDate(LocalDate.of(2020, Month.NOVEMBER, 30));
+        manga.setTitle("Class de 2 banme ni kawaii Onna no ko to Tomodachi ni natta");
+
+        when(mangaService.getMangaByTitle(manga.getTitle())).thenReturn(Optional.of(manga));
+
+        mockMvc.perform(get("/mangas/title/{title}", manga.getTitle())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.author").value(manga.getAuthor()))
+                .andExpect(jsonPath("$.releaseDate").value(manga.getReleaseDate().toString()))
+                .andExpect(jsonPath("$.title").value(manga.getTitle()));
+    }
+
+    @Test
+    void testGetMangaByTitleNotFound() throws Exception {
+        String title = "Netoge no yome ga ninki idol datta";
+
+        when(mangaService.getMangaByTitle(title)).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/mangas/title/{title}", title)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+    
     @Test
     void testUpdateManga() throws Exception{
         MangaDTO manga = new MangaDTO();
         manga.setAuthor("Takata");
         manga.setReleaseDate(LocalDate.of(2020, Month.NOVEMBER, 30));
         manga.setTitle("Class de 2 banme ni kawaii Onna no ko to Tomodachi ni natta");
-
+        
         mockMvc.perform(put("/mangas/updateManga")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(manga)))
@@ -119,27 +178,7 @@ public class MangaControllerTest {
     }
     
     @Test
-    void testDeleteChapter() throws Exception {
-        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
-        ObjectId chapterId = new ObjectId("66576e92361c4919d860a0dc");
-
-        mockMvc.perform(delete("/mangas/id/{mangaId}/chapter/{chapterId}/delete", mangaId, chapterId))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void testGetChapter() throws Exception {
-        
-    }
-
-    @Test
-    void testGetMangaById() throws Exception {
-
-    }
-
-    //For some reason it won't run if I name it testPostChapter
-    @Test
-    void testChapter() throws Exception {
+    void testPostChapter() throws Exception {
         ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
         ChapterDTO chapter = new ChapterDTO();
         chapter.setTitle("Kindred Sprits");
@@ -168,24 +207,117 @@ public class MangaControllerTest {
                 .andExpect(jsonPath("$.number").value(chapter.getNumber()))
                 .andExpect(jsonPath("$.title").value(chapter.getTitle()))
                 .andExpect(jsonPath("$.staff[0].name").value(member1.getName()))
-                .andExpect(jsonPath("$.staff[0].type").value(member1.getType().toString()))
+                .andExpect(jsonPath("$.staff[0].type").value("TRANSLATOR"))
                 .andExpect(jsonPath("$.staff[1].name").value(member2.getName()))
-                .andExpect(jsonPath("$.staff[1].type").value(member2.getType().toString()))
+                .andExpect(jsonPath("$.staff[1].type").value("REDRAWER"))
+                .andDo(print());
+    }
+    
+    @Test
+    void testGetChapter() throws Exception {
+        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
+        ChapterDTO chapter = new ChapterDTO();
+        chapter.setTitle("Secret Friend");
+        chapter.setMangaId(mangaId);
+        chapter.setNumber(2.0f);
+        
+        ArrayList<StaffMemberDTO> staff = new ArrayList();
+        StaffMemberDTO member1 = new StaffMemberDTO();
+        member1.setName("TheLuigi573");
+        member1.setType(StaffTypes.TRANSLATOR);
+        staff.add(member1);
+
+        StaffMemberDTO member2 = new StaffMemberDTO();
+        member2.setName("yosorou");
+        member2.setType(StaffTypes.REDRAWER);
+        staff.add(member2);
+        
+        chapter.setStaff(staff);
+        
+        when(chapterService.getChapter(mangaId, chapter.getTitle())).thenReturn(Optional.of(chapter));
+        
+        mockMvc.perform(get("/mangas/id/{mangaId}/chapter/{chapterTitle}", mangaId, chapter.getTitle()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.number").value(chapter.getNumber()))
+                .andExpect(jsonPath("$.title").value(chapter.getTitle()))
+                .andExpect(jsonPath("$.staff[0].name").value(member1.getName()))
+                .andExpect(jsonPath("$.staff[0].type").value("TRANSLATOR"))
+                .andExpect(jsonPath("$.staff[1].name").value(member2.getName()))
+                .andExpect(jsonPath("$.staff[1].type").value("REDRAWER"))
+                .andDo(print());
+    }
+    
+    @Test
+    void testGetChapterNotFound() throws Exception {
+        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
+        String title = "Goodwill and favors";
+        
+        when(chapterService.getChapter(mangaId, title)).thenReturn(Optional.empty());
+        
+        mockMvc.perform(get("/mangas/id/{mangaId}/chapter/{chapterTitle}", mangaId, title))
+                .andExpect(status().isNotFound())
                 .andDo(print());
     }
 
     @Test
-    void testGetMangaByTitle() throws Exception {
-
-    }
-
-    @Test
     void testGetMangaChapters() throws Exception {
+        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
+        ChapterDTO chapter1 = new ChapterDTO();
+        chapter1.setMangaId(new ObjectId("665a0dd7a9384af6a6951a7d"));
+        chapter1.setTitle("Dating Etiquette");
+        chapter1.setNumber(23.1f);
 
+        ChapterDTO chapter2 = new ChapterDTO();
+        chapter2.setMangaId(new ObjectId("665a0dd10fd77eb62c941d9c"));
+        chapter2.setTitle("Meeting after a long time");
+        chapter2.setNumber(22.1f);
+        
+        when(chapterService.getMangaChapters(mangaId)).thenReturn(Arrays.asList(chapter1, chapter2));
+
+        mockMvc.perform(get("/mangas/id/{mangaId}/chapters")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].title").value(chapter1.getTitle()))
+                .andExpect(jsonPath("$[0].number").value(chapter1.getNumber()))
+                .andExpect(jsonPath("$[1].title").value(chapter2.getTitle()))
+                .andExpect(jsonPath("$[1].number").value(chapter2.getNumber()));
     }
 
     @Test
     void testUpdateChapter() throws Exception {
+        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
+        ChapterDTO chapter = new ChapterDTO();
+        chapter.setId(new ObjectId("665ab143d28c946e03e3ed0c"));
+        chapter.setTitle("Kindred Sprits");
+        chapter.setMangaId(mangaId);
+        chapter.setNumber(1.1f);
 
+        ArrayList<StaffMemberDTO> staff = new ArrayList<>();
+        StaffMemberDTO member1 = new StaffMemberDTO();
+        member1.setName("TheLuigi573");
+        member1.setType(StaffTypes.TRANSLATOR);
+        staff.add(member1);
+
+        StaffMemberDTO member2 = new StaffMemberDTO();
+        member2.setName("Skynet");
+        member2.setType(StaffTypes.REDRAWER);
+        staff.add(member2);
+
+        chapter.setStaff(staff);
+        
+        mockMvc.perform(put("/mangas/id/{mangaId}/chapter/{chapterId}/update", mangaId, chapter.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(chapter)))
+                .andExpect(status().isOk());
+    }
+    
+    @Test
+    void testDeleteChapter() throws Exception {
+        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
+        ObjectId chapterId = new ObjectId("66576e92361c4919d860a0dc");
+
+        mockMvc.perform(delete("/mangas/id/{mangaId}/chapter/{chapterId}/delete", mangaId, chapterId))
+                .andExpect(status().isOk());
     }
 }
