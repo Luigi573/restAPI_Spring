@@ -1,6 +1,7 @@
 package mx.uv.fca.restAPI.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,6 @@ public class StaffMemberDTO {
 
     private LocalDate joinDate;
 
+    @NotNull(message = "Defina un tipo de miembro")
     private StaffTypes type;
-
 }

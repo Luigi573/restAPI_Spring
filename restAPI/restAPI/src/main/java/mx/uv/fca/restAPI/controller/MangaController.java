@@ -61,7 +61,7 @@ public class MangaController {
         return result;
     }
 
-    @DeleteMapping("id/{id}/delete")
+    @DeleteMapping("/id/{id}/delete")
     public ResponseEntity<Void> deleteManga(@PathVariable ObjectId id) {
         mangaService.deleteManga(id);
         return ResponseEntity.ok().build();
