@@ -7,12 +7,6 @@ pipeline {
        GIT_CREDENTIALS_ID = 'git-credentials'
     }
 
-    stage('Checkout') {
-        steps {
-            git url: 'https://github.com/Luigi573/restAPI_Spring.git', branch: 'main'
-        }
-    }
-
     stages {
         stage('Build') { 
             steps {
