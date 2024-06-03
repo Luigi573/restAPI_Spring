@@ -10,12 +10,12 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'gradlew clean build' 
+                sh './gradlew clean build' 
             }
         }
 	stage('Test') {
             steps {
-                sh 'gradlew test'
+                sh './gradlew test'
             }
             post {
                 always {
