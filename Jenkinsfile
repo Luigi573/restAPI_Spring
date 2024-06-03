@@ -26,7 +26,7 @@ pipeline {
 	stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_IMAGE .'
+                    docker.build(DOCKER_IMAGE)
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', "$DOCKER_CREDENTIALS_ID") {
-                        sh 'docker push $DOCKER_IMAGE'
+                        docker.image(DOCKER_IMAGE).push()
                     }
                 }
             }
