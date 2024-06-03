@@ -42,15 +42,15 @@ pipeline {
         stage('Commit and Push Changes') {
             steps {
                 script {
-                    sh 'git config user.name "your-username"'
-                    sh 'git config user.email "your-email@example.com"'
-                    
+                    sh 'git config user.name "Luigi573"'
+                    sh 'git config user.email "xavier.arian@gmail.com"'
+
                     sh 'git add version.txt'
-                    sh 'git commit -m "Update version to ${env.BUILD_NUMBER}"'
+                    sh 'git commit -m "Pushing changes from containerized Jenkins to Github"'
                     
                     // Push changes back to the repository
                     withCredentials([usernamePassword(credentialsId: "$GIT_CREDENTIALS_ID", usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                        sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@your-git-repo-url.git HEAD:main'
+                        sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Luigi573/restAPI_Spring.git HEAD:main'
                     }
                 }
             }
