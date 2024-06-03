@@ -10,12 +10,12 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'gradlew clean build' 
+                sh './gradlew clean build' 
             }
         }
 	stage('Test') {
             steps {
-                sh 'gradlew test'
+                sh './gradlew test'
             }
             post {
                 always {
@@ -26,8 +26,7 @@ pipeline {
 	stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build(DOCKER_IMAGE)
-
+                    sh 'docker build -t $DOCKER_IMAGE .'
                 }
             }
         }
@@ -35,7 +34,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', "$DOCKER_CREDENTIALS_ID") {
-                        docker.image(DOCKER_IMAGE).push()
+                        sh 'docker push $DOCKER_IMAGE'
                     }
                 }
             }
