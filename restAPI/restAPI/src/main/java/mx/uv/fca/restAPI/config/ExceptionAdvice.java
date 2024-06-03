@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ExceptionAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ErrorDTO validationErrors(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ErrorDTO> validationErrors(MethodArgumentNotValidException ex) {
 
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         List<String> errors = new LinkedList<>();
@@ -24,8 +24,9 @@ public class ExceptionAdvice {
         for (FieldError fieldError : fieldErrors) {
             errors.add(fieldError.getDefaultMessage());
         }
-
-        return new ErrorDTO("LIS001", "Error validación datos de entrada", errors);
+        
+        ErrorDTO error = new ErrorDTO("LIS001", "Error validación datos de entrada", errors); 
+        return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MongoException.class)

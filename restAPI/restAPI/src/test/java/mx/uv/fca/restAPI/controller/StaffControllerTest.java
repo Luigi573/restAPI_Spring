@@ -57,6 +57,17 @@ public class StaffControllerTest {
                 .andExpect(jsonPath("$.type").value("TRANSLATOR"))
                 .andDo(print());
     }
+    
+    @Test
+    public void testAddStaffMemberInvalid() throws Exception {
+        StaffMemberDTO staff = new StaffMemberDTO();
+        
+        mockMvc.perform(post("/staff/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(staff)))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
 
     @Test
     public void testGetStaffMembers() throws Exception {
@@ -124,6 +135,17 @@ public class StaffControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(staff)))
                 .andExpect(status().isOk())
+                .andDo(print());
+    }
+    
+    @Test
+    public void testUpdateStaffMemberInvalid() throws Exception {
+        StaffMemberDTO staff = new StaffMemberDTO();
+        
+        mockMvc.perform(put("/staff/update")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(staff)))
+                .andExpect(status().isBadRequest())
                 .andDo(print());
     }
 

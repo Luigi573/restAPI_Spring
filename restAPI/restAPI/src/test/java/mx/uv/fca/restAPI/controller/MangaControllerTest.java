@@ -66,6 +66,17 @@ public class MangaControllerTest {
                 .andExpect(jsonPath("$.releaseDate").value(manga.getReleaseDate().toString()))
                 .andDo(print());
     }
+    
+    @Test
+    void testAddMangaInvalid() throws Exception {
+        MangaDTO manga = new MangaDTO();
+        
+        mockMvc.perform(post("/mangas/addManga")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(manga)))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
 
     @Test
     void testGetMangas() throws Exception{
@@ -170,6 +181,17 @@ public class MangaControllerTest {
                 .content(objectMapper.writeValueAsString(manga)))
                 .andExpect(status().isOk());
     }
+    
+    @Test
+    void testUpdateMangaInvalid() throws Exception {
+        MangaDTO manga = new MangaDTO();
+        
+        mockMvc.perform(put("/mangas/updateManga")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(manga)))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
 
     @Test
     void testDeleteManga() throws Exception{
@@ -213,6 +235,18 @@ public class MangaControllerTest {
                 .andExpect(jsonPath("$.staff[0].type").value("TRANSLATOR"))
                 .andExpect(jsonPath("$.staff[1].name").value(member2.getName()))
                 .andExpect(jsonPath("$.staff[1].type").value("REDRAWER"))
+                .andDo(print());
+    }
+    
+    @Test
+    void testPostChapterInvalid() throws Exception {
+        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
+        ChapterDTO chapter = new ChapterDTO();
+        
+        mockMvc.perform(post("/mangas/id/{mangaId}/postChapter", mangaId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(chapter)))
+                .andExpect(status().isBadRequest())
                 .andDo(print());
     }
     
@@ -314,6 +348,19 @@ public class MangaControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(chapter)))
                 .andExpect(status().isOk())
+                .andDo(print());
+    }
+    
+    @Test
+    void testUpdateChapterInvalid() throws Exception {
+        ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
+        ChapterDTO chapter = new ChapterDTO();
+        chapter.setId(new ObjectId("665ab143d28c946e03e3ed0c"));
+        
+        mockMvc.perform(put("/mangas/id/{mangaId}/chapter/{chapterId}/update", mangaId, chapter.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(chapter)))
+                .andExpect(status().isBadRequest())
                 .andDo(print());
     }
     
