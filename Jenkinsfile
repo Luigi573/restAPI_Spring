@@ -33,7 +33,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).push()
+		    docker.withRegistry('', "$DOCKER_CREDENTIALS_ID") {
+                         docker.image(DOCKER_IMAGE).push()
+                    }
                 }
             }
         }
