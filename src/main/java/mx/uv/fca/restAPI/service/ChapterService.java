@@ -30,8 +30,8 @@ public class ChapterService {
         return chapterList;
     }
 
-    public Optional<ChapterDTO> getChapter(ObjectId id, String title) {
-        Optional<Chapter> chapter = chapterRepository.findByMangaIdAndTitle(id, title);
+    public Optional<ChapterDTO> getChapter(ObjectId mangaId, float number) {
+        Optional<Chapter> chapter = chapterRepository.findByMangaIdAndNumber(mangaId, number);
         Optional<ChapterDTO> result = Optional.empty();
 
         if (chapter.isPresent()) {

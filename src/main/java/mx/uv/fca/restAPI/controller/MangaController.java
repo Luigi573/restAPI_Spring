@@ -79,9 +79,9 @@ public class MangaController {
         return new ResponseEntity<List<ChapterDTO>>(chapterService.getMangaChapters(mangaId), HttpStatus.OK);
     }
 
-    @GetMapping("/id/{mangaId}/chapter/{chapterTitle}")
-    public ResponseEntity<ChapterDTO> getChapter(@PathVariable ObjectId mangaId, @PathVariable String chapterTitle) {
-        Optional<ChapterDTO> chapter = chapterService.getChapter(mangaId, chapterTitle);
+    @GetMapping("/id/{mangaId}/chapter/{number}")
+    public ResponseEntity<ChapterDTO> getChapter(@PathVariable ObjectId mangaId, @PathVariable float number) {
+        Optional<ChapterDTO> chapter = chapterService.getChapter(mangaId, number);
         ResponseEntity<ChapterDTO> result = ResponseEntity.notFound().build();
 
         if (chapter.isPresent()) {

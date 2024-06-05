@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MangaRepository extends MongoRepository<Manga, ObjectId> {
-    Optional<Manga> findByTitle(String title);
+    Optional<Manga> findByTitle(String title);    
 }

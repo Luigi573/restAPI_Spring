@@ -271,9 +271,9 @@ public class MangaControllerTest {
         
         chapter.setStaff(staff);
         
-        when(chapterService.getChapter(mangaId, chapter.getTitle())).thenReturn(Optional.of(chapter));
+        when(chapterService.getChapter(mangaId, chapter.getNumber())).thenReturn(Optional.of(chapter));
         
-        mockMvc.perform(get("/mangas/id/{mangaId}/chapter/{chapterTitle}", mangaId, chapter.getTitle()))
+        mockMvc.perform(get("/mangas/id/{mangaId}/chapter/{chapterNumber}", mangaId, chapter.getNumber()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.number").value(chapter.getNumber()))
                 .andExpect(jsonPath("$.title").value(chapter.getTitle()))
@@ -287,11 +287,11 @@ public class MangaControllerTest {
     @Test
     void testGetChapterNotFound() throws Exception {
         ObjectId mangaId = new ObjectId("66576c2361a5964afa6bbd4e");
-        String title = "Goodwill and favors";
+        float number = 23.1f;
         
-        when(chapterService.getChapter(mangaId, title)).thenReturn(Optional.empty());
+        when(chapterService.getChapter(mangaId, number)).thenReturn(Optional.empty());
         
-        mockMvc.perform(get("/mangas/id/{mangaId}/chapter/{chapterTitle}", mangaId, title))
+        mockMvc.perform(get("/mangas/id/{mangaId}/chapter/{number}", mangaId, number))
                 .andExpect(status().isNotFound())
                 .andDo(print());
     }
