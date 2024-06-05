@@ -68,8 +68,7 @@ public class MangaController {
     }
 
     @PostMapping("/id/{mangaId}/postChapter")
-    public ResponseEntity<ChapterDTO> postChapter(@PathVariable ObjectId mangaId,
-            @Valid @RequestBody ChapterDTO chapterDTO) {
+    public ResponseEntity<ChapterDTO> postChapter(@PathVariable ObjectId mangaId, @Valid @RequestBody ChapterDTO chapterDTO) {
         chapterDTO.setMangaId(mangaId);
         return new ResponseEntity<ChapterDTO>(chapterService.postChapter(chapterDTO), HttpStatus.CREATED);
     }
@@ -92,8 +91,7 @@ public class MangaController {
     }
 
     @PutMapping("/id/{mangaId}/chapter/{chapterId}/update")
-    public ResponseEntity<Void> updateChapter(@PathVariable ObjectId mangaId, @PathVariable ObjectId chapterId,
-            @Valid @RequestBody ChapterDTO chapterDTO) {
+    public ResponseEntity<Void> updateChapter(@PathVariable ObjectId mangaId, @PathVariable ObjectId chapterId, @Valid @RequestBody ChapterDTO chapterDTO) {
         chapterDTO.setMangaId(mangaId);
         chapterDTO.setId(chapterId);
         chapterService.updateChapter(chapterDTO);

@@ -9,5 +9,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface ChapterRepository extends MongoRepository<Chapter, ObjectId> {
     List<Chapter> findByMangaId(ObjectId mangaId);
     Optional<Chapter> findByMangaIdAndNumber(ObjectId mangaId, float number);
-    Optional<Chapter> findByTitle(String title);
 }
